@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>SandyBot</title>
+
+        <script src="eel.js"></script>
+        <link rel="icon" type="image/png" href="/favicon.png">
+        <link href="main.css" rel="stylesheet" type="text/css">
+
+        <style>
+
+            * {
+                box-sizing: border-box;
+            }
+            
+            .chat-container {
+                display: flex;
+                align-items: center;
+                flex-direction: column;
+            }
+
+            .chat-input {
+                width: 50%;
+                padding: 20px;
+                outline: none;
+                border: none;
+                border-radius: 5px;  
+                transition: .3s;
+            }
+
+            .chat-input:focus {
+                box-shadow: 0 0 10px lightblue;
+            }
+
+            .chat-reply {
+                padding: 20px;
+                width: 50%;
+                margin-top: 20px;
+                background: white;
+                border-radius: 5px;
+            }
+
+        </style>
+    </head>
+
+    <body>
+        <h1 id="a2">Привет, меня зовут <a href="SandyBot.docx">Sandy</a>!</h1><br/>
+        <h1 id="a1">Введи сообщение для диолога со мной.</h1><br/>
+        <h2 id="a3">Введите сообщение</h2><br/>
+
+        <div class="chat-container">
+            <input type="text" class="chat-input">
+        </div>
+
+        <script type="text/javascript" src="/eel.js"></script>
+
+        <script>
+
+            const chatInput = document.querySelector(".chat-input")
+            const charContainer = document.querySelector(".chat-container")
+
+            chatInput.addEventListener("keyup", e => {
+                console.log(e)
+                if (e.code === "Enter") {
+                    const replyEl = document.createElement("div")
+                    replyEl.classList.add("chat-reply")
+
+                    const command = chatInput.value
+                    let reply
+
+                    eel.reply_hello()(data => {
+                        reply = data // in data asnwer from Snake5.py
+                        replyEl.innerHTML = reply
+
+                        charContainer.append(replyEl)
+                        chatInput.value = ""
+                    })
+                }
+            })
+        </script>
+    </body>
+</html>
